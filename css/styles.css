@@ -77,3 +77,11 @@ button:hover {
   display: flex;
   justify-content: flex-end;
 }
+
+#newPicture {
+  width: 100%;
+}
+
+#newPicture2 {
+  width: 100%;
+}
