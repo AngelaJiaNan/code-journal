@@ -21,7 +21,7 @@ function noDefault(event) {
   object.notes = form.elements[2].value;
   object.entryId = data.nextEntryId;
   data.nextEntryId += 1;
-  data.entries.push(object);
+  data.entries.unshift(object);
   uploadedPicture.src = 'images/placeholder-image-square.jpg';
   form.reset();
 }
