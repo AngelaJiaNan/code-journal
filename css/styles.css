@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: lightgray;
+  line-height: 2;
+  font-family: 'Open Sans', sans-serif;
+}
+
+header {
+  background-color: indigo;
+}
+
+h1 {
+  color: white;
+  padding: 3px;
+  margin: 2px;
+  font-family: 'Proza Libre', fantasy;
+}
+
+h2 {
+  margin: 6px;
+  font-family: 'Proza Libre', fantasy;
+}
+
+#placeholder {
+  width: 100%;
+}
+
+# user-notes {
+  margin: 4px;
+}
+
+label,
+input,
+textarea {
+  display: block;
+  width: 100%;
+}
+
+button,
+input,
+textarea {
+  border-radius: 0.25rem;
+  line-height: 2;
+  border: 1px solid rgb(189, 189, 189);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 1px solid rgb(150, 66, 233);
+  box-shadow: 0 0 1px 1px rgba(150, 66, 233, 0.6);
+}
+
+button {
+  background-color: indigo;
+  color: white;
+  padding: 0.5 rem 1 rem;
+  line-height: 2;
+  width: 12%;
+  margin: 11px;
+  border-radius: 5px;
+  border: none;
+}
+
+button:focus {
+  outline: purple;
+}
+
+button:hover {
+  background-color: rgb(128, 52, 205);
+}
+
+.save-action {
+  display: flex;
+  justify-content: flex-end;
+}
