@@ -25,3 +25,43 @@ function noDefault(event) {
   uploadedPicture.src = 'images/placeholder-image-square.jpg';
   form.reset();
 }
+
+function renderEntries(entry) {
+  var li = document.createElement('li');
+  li.setAttribute('class', 'row');
+
+  var columnHalf = document.createElement('div');
+  columnHalf.setAttribute('class', 'column-half');
+
+  var image = document.createElement('img');
+  image.setAttribute('src', entry.url);
+
+  columnHalf.appendChild(image);
+  li.appendChild(columnHalf);
+
+  var columnRightHalf = document.createElement('div');
+  columnRightHalf.setAttribute('class', 'column-half');
+  li.appendChild(columnRightHalf);
+
+  var titleText = document.createElement('h3');
+  titleText.textContent = entry.title;
+  columnRightHalf.appendChild(titleText);
+
+  var textOne = document.createElement('p');
+  textOne.textContent = entry.notes;
+  columnRightHalf.appendChild(textOne);
+
+  var textTwo = document.createElement('p');
+  textTwo.textContent = entry.notes;
+  columnRightHalf.appendChild(textTwo);
+  return li;
+}
+
+var entryList = document.querySelector('ul');
+
+document.addEventListener('DOMContentLoaded', function (event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    var renderedEntry = renderEntries(data.entries[i]);
+    entryList.appendChild(renderedEntry);
+  }
+});
