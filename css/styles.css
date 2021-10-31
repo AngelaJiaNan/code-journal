@@ -85,3 +85,11 @@ button:hover {
 #newPicture2 {
   width: 100%;
 }
+
+#newButton {
+  float: right;
+}
+
+#bar {
+  color: white;
+}

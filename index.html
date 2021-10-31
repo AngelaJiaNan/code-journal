@@ -18,21 +18,36 @@
   <header>
     <div class="container">
       <div class="row">
-        <div class="column-full">
+        <div class="column-half">
           <h1 class="header">Code Journal</h1>
+        </div>
+        <div class="column-half">
+          <div class="navgation-bar">
+            <div id ="bar" data-view="entries">Entries</div>
+          </div>
         </div>
       </div>
     </div>
   </header>
   <main>
-    <div data-view="entry-form">
+    <div class="container">
+      <div class="row entries-header">
+        <div class="column-half">
+          <h2 class="header">Entries </h2>
+        </div>
+        <div class="column-half">
+          <button id="newButton" type="new">NEW</button>
+        </div>
+      </div>
+    </div>
+    <div data-view="entry-form" id="code-journal">
       <div class="container">
         <div class="row">
           <div class="column-full">
            <h2>New Entry</h2>
           </div>
         </div>
-        <form id="code-journal">
+        <form>
           <div class="row">
             <div class="column-half">
               <img id="placeholder" src="images/placeholder-image-square.jpg" alt="picture holder">
@@ -57,17 +72,10 @@
     <div data-view="entries">
       <div class="container">
         <div class="row">
-          <div class="column-half">
-            <h2 class="header">Entries </h2>
-          </div>
+          <ul id="entriesList"></ul>
         </div>
-        <ul>
-
-        </ul>
       </div>
     </div>
-
-
     </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

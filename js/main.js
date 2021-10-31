@@ -10,6 +10,7 @@ url.addEventListener('input', function (event) {
 
 var entry = document.querySelector('#code-journal');
 var form = document.forms[0];
+var entriesList = document.querySelector('#entriesList');
 
 entry.addEventListener('submit', noDefault);
 
@@ -23,6 +24,9 @@ function noDefault(event) {
   data.nextEntryId += 1;
   data.entries.unshift(object);
   uploadedPicture.src = 'images/placeholder-image-square.jpg';
+  entry.style.display = 'none';
+  entriesList.style.display = 'block';
+  entriesHeader.className = 'row entries-header';
   form.reset();
 }
 
@@ -64,4 +68,12 @@ document.addEventListener('DOMContentLoaded', function (event) {
     var renderedEntry = renderEntries(data.entries[i]);
     entryList.appendChild(renderedEntry);
   }
+});
+
+var newButton = document.querySelector('#newButton');
+var entriesHeader = document.querySelector('.entries-header');
+
+newButton.addEventListener('click', function (event) {
+  entry.id = 'code-journal show';
+  entriesHeader.className = 'row entries-header hidden';
 });

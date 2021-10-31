@@ -38,3 +38,27 @@
     flex-basis: 50%;
   }
 }
+
+/* [data-view="entries"] {
+  display: none;
+} */
+
+#code-journal {
+  display: none;
+}
+
+#entriesList {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+#hide {
+  display: none;
+}
+
+.hide {
+  display: none;
+}
