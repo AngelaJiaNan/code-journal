@@ -77,3 +77,25 @@ button:hover {
   display: flex;
   justify-content: flex-end;
 }
+
+#newButton {
+  float: right;
+}
+
+#bar {
+  color: white;
+  padding: 20px;
+}
+
+img {
+  width: 100%;
+}
+
+main {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+/* li {
+  margin-left: 12rem;
+} */
