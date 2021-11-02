@@ -16,15 +16,18 @@ entry.addEventListener('submit', noDefault);
 
 function noDefault(event) {
   event.preventDefault();
-  var object = {};
-  object.title = form.elements[0].value;
-  object.url = form.elements[1].value;
-  object.notes = form.elements[2].value;
-  object.entryId = data.nextEntryId;
+  var newEntry = {};
+  newEntry.title = form.elements[0].value;
+  newEntry.url = form.elements[1].value;
+  newEntry.notes = form.elements[2].value;
+  newEntry.entryId = data.nextEntryId;
   data.nextEntryId += 1;
-  data.entries.unshift(object);
+  data.entries.unshift(newEntry);
+  var renderedEntry = renderEntries(newEntry);
+  entryList.prepend(renderedEntry);
   uploadedPicture.src = 'images/placeholder-image-square.jpg';
   entry.style.display = 'none';
+  entryList.className = ' ';
   entriesList.style.display = 'block';
   entriesHeader.className = 'row entries-header';
   form.reset();
@@ -54,19 +57,21 @@ function renderEntries(entry) {
   var textOne = document.createElement('p');
   textOne.textContent = entry.notes;
   columnRightHalf.appendChild(textOne);
-
-  var textTwo = document.createElement('p');
-  textTwo.textContent = entry.notes;
-  columnRightHalf.appendChild(textTwo);
   return li;
 }
 
 var entryList = document.querySelector('ul');
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  for (var i = 0; i < data.entries.length; i++) {
-    var renderedEntry = renderEntries(data.entries[i]);
-    entryList.appendChild(renderedEntry);
+  if (data.entries.length > 0) {
+    for (var i = 0; i < data.entries.length; i++) {
+      var renderedEntry = renderEntries(data.entries[i]);
+      entryList.appendChild(renderedEntry);
+    }
+  } else {
+    var li = document.createElement('li');
+    li.textContent = 'No entries have been recorded.';
+    entryList.appendChild(li);
   }
 });
 
@@ -75,5 +80,6 @@ var entriesHeader = document.querySelector('.entries-header');
 
 newButton.addEventListener('click', function (event) {
   entry.id = 'code-journal show';
+  entryList.className = 'hidden';
   entriesHeader.className = 'row entries-header hidden';
 });

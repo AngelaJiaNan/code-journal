@@ -39,16 +39,12 @@
   }
 }
 
-/* [data-view="entries"] {
-  display: none;
-} */
-
 #code-journal {
   display: none;
 }
 
 #entriesList {
-  display: none;
+  list-style: none;
 }
 
 .show {
