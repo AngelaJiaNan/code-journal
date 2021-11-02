@@ -79,12 +79,14 @@ button:hover {
 }
 
 #newButton {
-  float: right;
+  margin-left: 339px;
 }
 
 #bar {
   color: white;
   padding: 20px;
+  margin-left: -206px;
+  font-family: 'Proza Libre', fantasy;
 }
 
 img {
@@ -96,6 +98,8 @@ main {
   padding-right: 5%;
 }
 
-/* li {
-  margin-left: 12rem;
-} */
+i {
+  color: indigo;
+  font-size: 24px;
+  margin-left: 339px;
+}

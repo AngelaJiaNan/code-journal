@@ -50,6 +50,10 @@ function renderEntries(entry) {
   columnRightHalf.setAttribute('class', 'column-half');
   li.appendChild(columnRightHalf);
 
+  var editBtn = document.createElement('i');
+  editBtn.setAttribute('class', 'fas fa-pen');
+  columnRightHalf.appendChild(editBtn);
+
   var titleText = document.createElement('h3');
   titleText.textContent = entry.title;
   columnRightHalf.appendChild(titleText);
