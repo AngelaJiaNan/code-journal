@@ -36,6 +36,7 @@ function noDefault(event) {
 function renderEntries(entry) {
   var li = document.createElement('li');
   li.setAttribute('class', 'row');
+  li.setAttribute('data-entry-id', entry.id);
 
   var columnHalf = document.createElement('div');
   columnHalf.setAttribute('class', 'column-half');
