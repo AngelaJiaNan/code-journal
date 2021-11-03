@@ -36,7 +36,16 @@ function noDefault(event) {
 function renderEntries(entry) {
   var li = document.createElement('li');
   li.setAttribute('class', 'row');
-  li.setAttribute('data-entry-id', entry.id);
+  li.setAttribute('data-entry-id', entry.entryId);
+  li.addEventListener('click', function (event) {
+    if (event.target.className === 'fas fa-pen') {
+      entry.id = 'code-journal show';
+      entryList.className = 'hidden';
+      entriesHeader.className = 'row entries-header hidden';
+      var entryId = ~~event.target.parentElement.parentElement.attributes[1].value;
+      findEntry(entryId);
+    }
+  });
 
   var columnHalf = document.createElement('div');
   columnHalf.setAttribute('class', 'column-half');
@@ -89,10 +98,10 @@ newButton.addEventListener('click', function (event) {
   entriesHeader.className = 'row entries-header hidden';
 });
 
-entryList.addEventListener('click', function (event) {
-  if (event.target.className === 'fas fa-pen') {
-    entry.id = 'code-journal show';
-    entryList.className = 'hidden';
-    entriesHeader.className = 'row entries-header hidden';
+function findEntry(entryId) {
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === entryId) {
+      data.editing = data.entries[i];
+    }
   }
-});
+}
