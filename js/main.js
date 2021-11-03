@@ -88,3 +88,11 @@ newButton.addEventListener('click', function (event) {
   entryList.className = 'hidden';
   entriesHeader.className = 'row entries-header hidden';
 });
+
+entryList.addEventListener('click', function (event) {
+  if (event.target.className === 'fas fa-pen') {
+    entry.id = 'code-journal show';
+    entryList.className = 'hidden';
+    entriesHeader.className = 'row entries-header hidden';
+  }
+});
