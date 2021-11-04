@@ -2,6 +2,8 @@
 /* exported data */
 var url = document.querySelector('#user-url');
 var uploadedPicture = document.querySelector('#placeholder');
+var title = document.querySelector('#user-title');
+var notes = document.querySelector('#user-notes');
 
 url.addEventListener('input', function (event) {
   var pictureUrl = event.target.value;
@@ -26,23 +28,24 @@ function noDefault(event) {
   var renderedEntry = renderEntries(newEntry);
   entryList.prepend(renderedEntry);
   uploadedPicture.src = 'images/placeholder-image-square.jpg';
-  entry.style.display = 'none';
+  entry.className = 'hidden';
   entryList.className = ' ';
   entriesList.style.display = 'block';
   entriesHeader.className = 'row entries-header';
   form.reset();
 }
 
-function renderEntries(entry) {
+function renderEntries(currentEntries) {
   var li = document.createElement('li');
   li.setAttribute('class', 'row');
-  li.setAttribute('data-entry-id', entry.entryId);
+  li.setAttribute('data-entry-id', currentEntries.entryId);
   li.addEventListener('click', function (event) {
     if (event.target.className === 'fas fa-pen') {
-      entry.id = 'code-journal show';
+      entry.className = ' ';
       entryList.className = 'hidden';
       entriesHeader.className = 'row entries-header hidden';
-      var entryId = ~~event.target.parentElement.parentElement.attributes[1].value;
+      var closestLi = event.target.closest('li');
+      var entryId = parseInt(closestLi.getAttribute('data-entry-id'));
       findEntry(entryId);
     }
   });
@@ -51,7 +54,7 @@ function renderEntries(entry) {
   columnHalf.setAttribute('class', 'column-half');
 
   var image = document.createElement('img');
-  image.setAttribute('src', entry.url);
+  image.setAttribute('src', currentEntries.url);
 
   columnHalf.appendChild(image);
   li.appendChild(columnHalf);
@@ -65,11 +68,11 @@ function renderEntries(entry) {
   columnRightHalf.appendChild(editBtn);
 
   var titleText = document.createElement('h3');
-  titleText.textContent = entry.title;
+  titleText.textContent = currentEntries.title;
   columnRightHalf.appendChild(titleText);
 
   var textOne = document.createElement('p');
-  textOne.textContent = entry.notes;
+  textOne.textContent = currentEntries.notes;
   columnRightHalf.appendChild(textOne);
   return li;
 }
@@ -95,6 +98,7 @@ var entriesHeader = document.querySelector('.entries-header');
 newButton.addEventListener('click', function (event) {
   entry.id = 'code-journal show';
   entryList.className = 'hidden';
+  entry.className = '';
   entriesHeader.className = 'row entries-header hidden';
 });
 
@@ -104,4 +108,8 @@ function findEntry(entryId) {
       data.editing = data.entries[i];
     }
   }
+  title.value = data.editing.title;
+  url.value = data.editing.url;
+  uploadedPicture.value = data.editing.uploadedPicture;
+  notes.textContent = data.editing.notes;
 }

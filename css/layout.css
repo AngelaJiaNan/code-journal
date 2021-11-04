@@ -39,13 +39,9 @@
   }
 }
 
-#code-journal {
-  display: none;
-}
-
-#entriesList {
+/* #entriesList {
   list-style: none;
-}
+} */
 
 .show {
   display: block;
