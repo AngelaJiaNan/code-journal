@@ -29,7 +29,6 @@ function noDefault(event) {
     newEntry.entryId = data.nextEntryId++;
     data.entries.unshift(newEntry);
   }
-
   var renderedEntry = renderEntries(newEntry);
   entryList.prepend(renderedEntry);
   uploadedPicture.src = 'images/placeholder-image-square.jpg';
