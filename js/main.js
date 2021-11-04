@@ -4,6 +4,7 @@ var url = document.querySelector('#user-url');
 var uploadedPicture = document.querySelector('#placeholder');
 var title = document.querySelector('#user-title');
 var notes = document.querySelector('#user-notes');
+var formTitle = document.querySelector('.formTitle');
 
 url.addEventListener('input', function (event) {
   var pictureUrl = event.target.value;
@@ -22,9 +23,13 @@ function noDefault(event) {
   newEntry.title = form.elements[0].value;
   newEntry.url = form.elements[1].value;
   newEntry.notes = form.elements[2].value;
-  newEntry.entryId = data.nextEntryId;
-  data.nextEntryId += 1;
-  data.entries.unshift(newEntry);
+  if (data.editing) {
+    newEntry.entryId = data.editing.entryId;
+  } else {
+    newEntry.entryId = data.nextEntryId++;
+    data.entries.unshift(newEntry);
+  }
+
   var renderedEntry = renderEntries(newEntry);
   entryList.prepend(renderedEntry);
   uploadedPicture.src = 'images/placeholder-image-square.jpg';
@@ -46,6 +51,7 @@ function renderEntries(currentEntries) {
       entriesHeader.className = 'row entries-header hidden';
       var closestLi = event.target.closest('li');
       var entryId = parseInt(closestLi.getAttribute('data-entry-id'));
+      formTitle.textContent = 'Edit Entry';
       findEntry(entryId);
     }
   });
@@ -99,6 +105,7 @@ newButton.addEventListener('click', function (event) {
   entry.id = 'code-journal show';
   entryList.className = 'hidden';
   entry.className = '';
+  formTitle.textContent = 'New Entry';
   entriesHeader.className = 'row entries-header hidden';
 });
 
