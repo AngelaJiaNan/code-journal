@@ -5,6 +5,7 @@ var uploadedPicture = document.querySelector('#placeholder');
 var title = document.querySelector('#user-title');
 var notes = document.querySelector('#user-notes');
 var formTitle = document.querySelector('.formTitle');
+var saveclass = document.querySelector('.save-action');
 
 url.addEventListener('input', function (event) {
   var pictureUrl = event.target.value;
@@ -45,6 +46,7 @@ function renderEntries(currentEntries) {
   li.setAttribute('class', 'row');
   li.setAttribute('data-entry-id', currentEntries.entryId);
   li.addEventListener('click', function (event) {
+
     if (event.target.className === 'fas fa-pen') {
       entry.className = ' ';
       entryList.className = 'hidden';
@@ -52,6 +54,37 @@ function renderEntries(currentEntries) {
       var closestLi = event.target.closest('li');
       var entryId = parseInt(closestLi.getAttribute('data-entry-id'));
       formTitle.textContent = 'Edit Entry';
+      var deleteEntry = document.createElement('div');
+      deleteEntry.setAttribute('class', 'delete');
+      saveclass.appendChild(deleteEntry);
+      deleteEntry.textContent = 'Delete Entry';
+
+      var modal = document.createElement('div');
+      modal.setAttribute('class', 'modal');
+
+      var modalContent = document.createElement('div');
+      modalContent.setAttribute('class', 'modal-content');
+      modal.appendChild(modalContent);
+
+      var msgModal = document.createElement('p');
+      msgModal.textContent = 'Are you sure you want to delete this entry?';
+      modalContent.appendChild(msgModal);
+
+      var modalBtn = document.createElement('div');
+      modalBtn.setAttribute('class', 'modal-button');
+      modalContent.appendChild(modalBtn);
+
+      var cancelBtn = document.createElement('button');
+      cancelBtn.setAttribute('id', 'cancelBtn');
+      cancelBtn.textContent = 'CANCEL';
+      modalContent.appendChild(cancelBtn);
+
+      var confirmBtn = document.createElement('button');
+      confirmBtn.setAttribute('id', 'confirmBtn');
+      confirmBtn.textContent = 'CONFIRM';
+      modalContent.appendChild(confirmBtn);
+      deleteEntry.appendChild(modal);
+
       findEntry(entryId);
     }
   });
@@ -80,6 +113,7 @@ function renderEntries(currentEntries) {
   var textOne = document.createElement('p');
   textOne.textContent = currentEntries.notes;
   columnRightHalf.appendChild(textOne);
+
   return li;
 }
 
