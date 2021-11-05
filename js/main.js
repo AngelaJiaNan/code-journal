@@ -5,7 +5,7 @@ var uploadedPicture = document.querySelector('#placeholder');
 var title = document.querySelector('#user-title');
 var notes = document.querySelector('#user-notes');
 var formTitle = document.querySelector('.formTitle');
-var saveclass = document.querySelector('.save-action');
+var deleteEntry = document.querySelector('.delete');
 
 url.addEventListener('input', function (event) {
   var pictureUrl = event.target.value;
@@ -46,7 +46,6 @@ function renderEntries(currentEntries) {
   li.setAttribute('class', 'row');
   li.setAttribute('data-entry-id', currentEntries.entryId);
   li.addEventListener('click', function (event) {
-
     if (event.target.className === 'fas fa-pen') {
       entry.className = ' ';
       entryList.className = 'hidden';
@@ -54,47 +53,64 @@ function renderEntries(currentEntries) {
       var closestLi = event.target.closest('li');
       var entryId = parseInt(closestLi.getAttribute('data-entry-id'));
       formTitle.textContent = 'Edit Entry';
-      var deleteEntry = document.createElement('div');
-      deleteEntry.setAttribute('class', 'delete');
-      saveclass.appendChild(deleteEntry);
-      deleteEntry.textContent = 'Delete Entry';
 
-      var modal = document.createElement('div');
-      modal.setAttribute('class', 'modal');
+      // var deleteEntry = document.createElement('div');
+      // deleteEntry.setAttribute('class', 'delete');
+      // saveclass.appendChild(deleteEntry);
+      // deleteEntry.textContent = 'Delete Entry';
 
-      var modalContent = document.createElement('div');
-      modalContent.setAttribute('class', 'modal-content');
-      modal.appendChild(modalContent);
+      // var modal = document.createElement('div');
+      // modal.setAttribute('class', 'modal');
 
-      var msgModal = document.createElement('p');
-      msgModal.textContent = 'Are you sure you want to delete this entry?';
-      modalContent.appendChild(msgModal);
+      // var modalContent = document.createElement('div');
+      // modalContent.setAttribute('class', 'modal-content');
+      // modal.appendChild(modalContent);
 
-      var modalBtn = document.createElement('div');
-      modalBtn.setAttribute('class', 'modal-button');
-      modalContent.appendChild(modalBtn);
+      // var msgModal = document.createElement('p');
+      // msgModal.textContent = 'Are you sure you want to delete this entry?';
+      // modalContent.appendChild(msgModal);
 
-      var cancelBtn = document.createElement('button');
-      cancelBtn.setAttribute('id', 'cancelBtn');
-      cancelBtn.textContent = 'CANCEL';
-      modalContent.appendChild(cancelBtn);
+      // var modalBtn = document.createElement('div');
+      // modalBtn.setAttribute('class', 'modal-button');
+      // modalContent.appendChild(modalBtn);
 
-      var confirmBtn = document.createElement('button');
-      confirmBtn.setAttribute('id', 'confirmBtn');
-      confirmBtn.textContent = 'CONFIRM';
-      modalContent.appendChild(confirmBtn);
-      deleteEntry.appendChild(modal);
+      // var cancelBtn = document.createElement('button');
+      // cancelBtn.setAttribute('id', 'cancelBtn');
+      // cancelBtn.textContent = 'CANCEL';
+      // modalContent.appendChild(cancelBtn);
 
-      deleteEntry.onclick = function () {
-        modal.style.display = 'block';
-      };
+      // var confirmBtn = document.createElement('button');
+      // confirmBtn.setAttribute('id', 'confirmBtn');
+      // confirmBtn.textContent = 'CONFIRM';
+      // modalContent.appendChild(confirmBtn);
+      // deleteEntry.appendChild(modal);
 
-      cancelBtn.onclick = function () {
-        modal.style.display = 'none';
-      };
+      deleteEntry.style.display = 'block';
 
       findEntry(entryId);
     }
+  });
+
+  var modal = document.querySelector('.modal');
+  var cancelBtn = document.querySelector('#cancelBtn');
+  var confirmBtn = document.querySelector('#confirmBtn');
+
+  deleteEntry.addEventListener('click', function () {
+    modal.className = 'modal show';
+  });
+
+  cancelBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    modal.className = 'modal hidden';
+  });
+
+  confirmBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    // console.log(event.target);
+    modal.className = 'hidden';
+    entry.className = 'hidden';
+    entriesList.className = 'show';
+    // closestLi.remove();
   });
 
   var columnHalf = document.createElement('div');
