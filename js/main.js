@@ -89,6 +89,10 @@ function renderEntries(currentEntries) {
         modal.style.display = 'block';
       };
 
+      cancelBtn.onclick = function () {
+        modal.style.display = 'none';
+      };
+
       findEntry(entryId);
     }
   });
