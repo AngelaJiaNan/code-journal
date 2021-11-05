@@ -30,9 +30,7 @@ function noDefault(event) {
     newEntry.entryId = data.nextEntryId++;
     data.entries.unshift(newEntry);
   }
-
-  var renderedEntry = renderEntries(newEntry);
-  entryList.prepend(renderedEntry);
+  rebuildDom();
   uploadedPicture.src = 'images/placeholder-image-square.jpg';
   entry.className = 'hidden';
   entryList.className = ' ';
@@ -53,38 +51,6 @@ function renderEntries(currentEntries) {
       var closestLi = event.target.closest('li');
       var entryId = parseInt(closestLi.getAttribute('data-entry-id'));
       formTitle.textContent = 'Edit Entry';
-
-      // var deleteEntry = document.createElement('div');
-      // deleteEntry.setAttribute('class', 'delete');
-      // saveclass.appendChild(deleteEntry);
-      // deleteEntry.textContent = 'Delete Entry';
-
-      // var modal = document.createElement('div');
-      // modal.setAttribute('class', 'modal');
-
-      // var modalContent = document.createElement('div');
-      // modalContent.setAttribute('class', 'modal-content');
-      // modal.appendChild(modalContent);
-
-      // var msgModal = document.createElement('p');
-      // msgModal.textContent = 'Are you sure you want to delete this entry?';
-      // modalContent.appendChild(msgModal);
-
-      // var modalBtn = document.createElement('div');
-      // modalBtn.setAttribute('class', 'modal-button');
-      // modalContent.appendChild(modalBtn);
-
-      // var cancelBtn = document.createElement('button');
-      // cancelBtn.setAttribute('id', 'cancelBtn');
-      // cancelBtn.textContent = 'CANCEL';
-      // modalContent.appendChild(cancelBtn);
-
-      // var confirmBtn = document.createElement('button');
-      // confirmBtn.setAttribute('id', 'confirmBtn');
-      // confirmBtn.textContent = 'CONFIRM';
-      // modalContent.appendChild(confirmBtn);
-      // deleteEntry.appendChild(modal);
-
       deleteEntry.style.display = 'block';
 
       findEntry(entryId);
@@ -106,11 +72,14 @@ function renderEntries(currentEntries) {
 
   confirmBtn.addEventListener('click', function (event) {
     event.preventDefault();
-    // console.log(event.target);
     modal.className = 'hidden';
     entry.className = 'hidden';
+    entriesHeader.className = 'show';
     entriesList.className = 'show';
-    // closestLi.remove();
+    // for (var d = 0; d < data.entries.length; d++) {
+    //   if (data.entries[d].entryId === entryID);
+    // }
+    li.remove();
   });
 
   var columnHalf = document.createElement('div');
@@ -143,8 +112,11 @@ function renderEntries(currentEntries) {
 
 var entryList = document.querySelector('ul');
 
-document.addEventListener('DOMContentLoaded', function (event) {
+document.addEventListener('DOMContentLoaded', rebuildDom);
+
+function rebuildDom(event) {
   if (data.entries.length > 0) {
+    entryList.innerHTML = '';
     for (var i = 0; i < data.entries.length; i++) {
       var renderedEntry = renderEntries(data.entries[i]);
       entryList.appendChild(renderedEntry);
@@ -154,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     li.textContent = 'No entries have been recorded.';
     entryList.appendChild(li);
   }
-});
+}
 
 var newButton = document.querySelector('#newButton');
 var entriesHeader = document.querySelector('.entries-header');
