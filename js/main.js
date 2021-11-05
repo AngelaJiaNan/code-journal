@@ -85,6 +85,10 @@ function renderEntries(currentEntries) {
       modalContent.appendChild(confirmBtn);
       deleteEntry.appendChild(modal);
 
+      deleteEntry.onclick = function () {
+        modal.style.display = 'block';
+      };
+
       findEntry(entryId);
     }
   });
