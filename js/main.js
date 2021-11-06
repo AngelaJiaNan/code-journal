@@ -76,10 +76,13 @@ function renderEntries(currentEntries) {
     entry.className = 'hidden';
     entriesHeader.className = 'show';
     entriesList.className = 'show';
-    // for (var d = 0; d < data.entries.length; d++) {
-    //   if (data.entries[d].entryId === entryID);
-    // }
-    li.remove();
+    var currentLi = document.querySelector(`li[data-entry-id="${data.editing.entryId}"`);
+    for (var d = 0; d < data.entries.length; d++) {
+      if (data.entries[d].entryId === data.editing.entryId) {
+        data.entries.splice(d, 1);
+      }
+    }
+    currentLi.remove();
   });
 
   var columnHalf = document.createElement('div');
