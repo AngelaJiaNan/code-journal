@@ -105,7 +105,8 @@ i {
 }
 
 .delete {
-  display: none;
+  display: flex;
+  margin-right: 73%;
   color: red;
   text-decoration: underline;
 }
