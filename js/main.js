@@ -5,6 +5,7 @@ var uploadedPicture = document.querySelector('#placeholder');
 var title = document.querySelector('#user-title');
 var notes = document.querySelector('#user-notes');
 var formTitle = document.querySelector('.formTitle');
+var deleteEntry = document.querySelector('.delete');
 
 url.addEventListener('input', function (event) {
   var pictureUrl = event.target.value;
@@ -29,9 +30,7 @@ function noDefault(event) {
     newEntry.entryId = data.nextEntryId++;
     data.entries.unshift(newEntry);
   }
-
-  var renderedEntry = renderEntries(newEntry);
-  entryList.prepend(renderedEntry);
+  rebuildDom();
   uploadedPicture.src = 'images/placeholder-image-square.jpg';
   entry.className = 'hidden';
   entryList.className = ' ';
@@ -52,8 +51,38 @@ function renderEntries(currentEntries) {
       var closestLi = event.target.closest('li');
       var entryId = parseInt(closestLi.getAttribute('data-entry-id'));
       formTitle.textContent = 'Edit Entry';
+      deleteEntry.style.display = 'block';
+
       findEntry(entryId);
     }
+  });
+
+  var modal = document.querySelector('.modal');
+  var cancelBtn = document.querySelector('#cancelBtn');
+  var confirmBtn = document.querySelector('#confirmBtn');
+
+  deleteEntry.addEventListener('click', function () {
+    modal.className = 'modal show';
+  });
+
+  cancelBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    modal.className = 'modal hidden';
+  });
+
+  confirmBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    modal.className = 'hidden';
+    entry.className = 'hidden';
+    entriesHeader.className = 'show';
+    entriesList.className = 'show';
+    var currentLi = document.querySelector(`li[data-entry-id="${data.editing.entryId}"`);
+    for (var d = 0; d < data.entries.length; d++) {
+      if (data.entries[d].entryId === data.editing.entryId) {
+        data.entries.splice(d, 1);
+      }
+    }
+    currentLi.remove();
   });
 
   var columnHalf = document.createElement('div');
@@ -80,13 +109,17 @@ function renderEntries(currentEntries) {
   var textOne = document.createElement('p');
   textOne.textContent = currentEntries.notes;
   columnRightHalf.appendChild(textOne);
+
   return li;
 }
 
 var entryList = document.querySelector('ul');
 
-document.addEventListener('DOMContentLoaded', function (event) {
+document.addEventListener('DOMContentLoaded', rebuildDom);
+
+function rebuildDom(event) {
   if (data.entries.length > 0) {
+    entryList.innerHTML = '';
     for (var i = 0; i < data.entries.length; i++) {
       var renderedEntry = renderEntries(data.entries[i]);
       entryList.appendChild(renderedEntry);
@@ -96,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     li.textContent = 'No entries have been recorded.';
     entryList.appendChild(li);
   }
-});
+}
 
 var newButton = document.querySelector('#newButton');
 var entriesHeader = document.querySelector('.entries-header');

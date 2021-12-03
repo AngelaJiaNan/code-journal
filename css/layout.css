@@ -39,12 +39,8 @@
   }
 }
 
-/* #entriesList {
-  list-style: none;
-} */
-
 .show {
-  display: block;
+  display: block !important;
 }
 
 #hide {
